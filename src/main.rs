@@ -1,17 +1,23 @@
-use axum::{
-    routing::get,
-    Router,
-};
+use std::{env, io}; 
+use std::net::TcpListener;
 
-mod domain;
-use crate::domain::notification_entity::NotificationEntity;
 
-#[tokio::main]
-async fn main() {
-    // build our application with a single route
-    let app = Router::new().route("/", get(|| async { "Hello, World!" }));
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+#[actix_web::main]
+async fn main() -> io::Result<()> {
+    let enviroment_file; 
+    if let Ok(e) = env::var("ENV") {
+        enviroment_file = format!(".env.{}", e);
+    } else {
+        enviroment_file = String::from(".env");
+    }
+
+
+    dotenv::from_filename(enviroment_file).ok();
+
+
+    let listener = TcpListener::bind("0.0.0.0:8888").expect("Failed to bind radom port");
+    let database_name = dotenv::var("DATABASE_NAME").expect("DATABASE_NAME must be seted");
+
+    run(listener, &database_name)?.await
 }

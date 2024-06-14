@@ -31,3 +31,17 @@ impl NotificationEntity {
         }
     }
 }
+
+
+impl ToString for Status {
+    fn to_string(&self) -> String {
+        match self {
+            Status::StatusReady => "ready".to_string(),
+            Status::StatusProcessing => "processing".to_string(),
+            Status::StatusFailed => "failed".to_string(),
+            Status::StatusSuccess => "success".to_string(),
+            Status::StatusPending => "pending".to_string(),
+            Status::StatusViewed => "viewed".to_string(),
+        }
+    }
+}

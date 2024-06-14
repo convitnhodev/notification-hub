@@ -8,6 +8,6 @@ use crate::domain::notification_entity::NotificationEntity;
 
 #[async_trait(?Send)]
 pub trait NotificationRepositoryAbstract {
-    async fn create(&self) -> Result<CatFactEntity, Box<dyn Error>>;
-    async fn get_all_cat_facts(&self) -> Result<Vec<CatFactEntity>, Box<dyn Error>>;
+    async fn create_new_notification(&self, notification_entity: NotificationEntity) -> Result<String, Box<Error>> ;
+    async fn get_by_id(&self, id: String) -> Result<NotificationEntity, Box<Error>>;
 }
