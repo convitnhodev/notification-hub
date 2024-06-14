@@ -1,7 +1,8 @@
 use crate::adapters::spi::db::schema::*;
 
-#[derive(Queryable, QueryableByName)]
+#[derive(Queryable, QueryableByName, Selectable)]
 #[table_name = "notifications"]
+#[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Notification {
     pub id: String,
     pub from_user: String,
