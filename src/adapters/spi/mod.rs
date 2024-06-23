@@ -1,2 +1,2 @@
 pub mod db;
-pub mod http;
+mod http;

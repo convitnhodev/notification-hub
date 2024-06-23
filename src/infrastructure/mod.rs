@@ -1,9 +1,8 @@
 use std::{env, net::TcpListener};
 
 
-use actix_web::{dev::Server, middleware::Logger}; 
+use actix_web::{dev::Server, middleware::Logger};
 use actix_web::{web, App, HttpServer};
-
 
 use crate::adapters::{
     self, 
